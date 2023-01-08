@@ -6,7 +6,7 @@ package org.example.ratelimiter;
  * This implementation does not smoothen out the rates and hence, could not control the sudden bursts of requests.
  * Only guarantee that it provides is on the lines of how many transaction can happen in a second.
  */
-public class DroppingRateLimiter implements RateLimiter {
+public class TokenBucketRateLimiter implements RateLimiter {
 
     private static final long NANO_PER_SEC = 1000000000;
 
@@ -17,7 +17,7 @@ public class DroppingRateLimiter implements RateLimiter {
 
     private final Object mLock = new Object();
 
-    public DroppingRateLimiter(int rate) {
+    public TokenBucketRateLimiter(int rate) {
         this.mTPS = rate;
         this.mCounter = 0;
         this.mLastExecutionNanos = 0L;

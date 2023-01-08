@@ -1,11 +1,11 @@
 package org.example;
 
-import org.example.ratelimiter.DroppingRateLimiter;
+import org.example.ratelimiter.TokenBucketRateLimiter;
 import org.example.ratelimiter.RateLimiter;
 
 public class Main {
     public static void main(String[] args) {
-        RateLimiter limiter = new DroppingRateLimiter(2);
+        RateLimiter limiter = new TokenBucketRateLimiter(2);
         Thread[] group = new Thread[6];
         Runnable r = () -> {
             for (int i = 0; i < 100; i++) {
