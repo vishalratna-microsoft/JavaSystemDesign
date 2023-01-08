@@ -1,7 +1,27 @@
 package org.example;
 
+import org.example.ratelimiter.DroppingRateLimiter;
+import org.example.ratelimiter.RateLimiter;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        RateLimiter limiter = new DroppingRateLimiter(2);
+        Thread[] group = new Thread[6];
+        Runnable r = () -> {
+            for (int i = 0; i < 100; i++) {
+                int finalI = i;
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                limiter.throttle(() -> System.out.println("Values:- " + Thread.currentThread().getName() + ": " + finalI));
+            }
+        };
+
+        for (int i = 0; i < 6; i++) {
+            group[i] = new Thread(r);
+            group[i].start();
+        }
     }
 }
