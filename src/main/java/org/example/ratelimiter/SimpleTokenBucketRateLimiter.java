@@ -84,11 +84,10 @@ public class SimpleTokenBucketRateLimiter implements RateLimiter {
                     } else return false;
                 } else {
                     // Reset the counter as we in a different second now.
-                    System.out.println("next second");
                     mCounter = 0;
                     mLastExecutionNanos = 0L;
                     mNextSecondBoundary = 0L;
-                    return true;
+                    return enter();
                 }
             }
         }
