@@ -6,7 +6,7 @@ package org.example.ratelimiter;
  * This implementation does not smoothen out the rates and hence, could not control the sudden bursts of requests.
  * Only guarantee that it provides is on the lines of how many transaction can happen in a second.
  */
-public class TokenBucketRateLimiter implements RateLimiter {
+public class SimpleTokenBucketRateLimiter implements RateLimiter {
 
     private static final long NANO_PER_SEC = 1000000000;
 
@@ -16,17 +16,19 @@ public class TokenBucketRateLimiter implements RateLimiter {
     private long mCounter;
 
     private final Object mLock = new Object();
+    private final Object mBoundaryLock = new Object();
 
-    public TokenBucketRateLimiter(int rate) {
+    public SimpleTokenBucketRateLimiter(int rate) {
         this.mTPS = rate;
         this.mCounter = 0;
         this.mLastExecutionNanos = 0L;
         this.mNextSecondBoundary = 0L;
     }
 
+    // Suboptimal implementation
     @Override
     public boolean throttle(Code code) {
-        if (mTPS == 0) {
+        if (mTPS <= 0) {
             // We do not want anything to pass.
             return false;
         }
@@ -60,21 +62,43 @@ public class TokenBucketRateLimiter implements RateLimiter {
         }
     }
 
+    @Override
+    public boolean enter() {
+        if (mTPS == 0L) {
+            return false;
+        }
+
+        synchronized (mBoundaryLock) {
+            if (mLastExecutionNanos == 0L) {
+                mLastExecutionNanos = System.nanoTime();
+                mCounter++;
+                mNextSecondBoundary = mLastExecutionNanos + NANO_PER_SEC;
+                return true;
+            } else {
+                long now = System.nanoTime();
+                if (now <= mNextSecondBoundary) {
+                    if (mCounter < mTPS) {
+                        mLastExecutionNanos = now;
+                        mCounter++;
+                        return true;
+                    } else return false;
+                } else {
+                    // Reset the counter as we in a different second now.
+                    System.out.println("next second");
+                    mCounter = 0;
+                    mLastExecutionNanos = 0L;
+                    mNextSecondBoundary = 0L;
+                    return true;
+                }
+            }
+        }
+    }
+
     private void invoke(Code code) {
         try {
             code.invoke();
         } catch (Throwable th) {
             // Ssssh!
         }
-    }
-
-    @Override
-    public void entry() {
-        throw new NoImplementationException();
-    }
-
-    @Override
-    public boolean exit() {
-        throw new NoImplementationException();
     }
 }
