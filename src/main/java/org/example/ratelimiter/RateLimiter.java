@@ -25,6 +25,8 @@ public interface RateLimiter {
      * When the piece of code that needs to be rate limited cannot be represented as a contiguous
      * code, then entry() should be used before we start executing the code. This brings the code inside the rate
      * limiting boundaries.
+     *
+     * @return true if the code will execute and false if rate limited.
      * <p
      */
     boolean enter();
