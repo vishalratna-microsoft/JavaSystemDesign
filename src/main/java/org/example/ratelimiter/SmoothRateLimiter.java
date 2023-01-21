@@ -51,8 +51,8 @@ public class SmoothRateLimiter implements RateLimiter {
                     sleepWithoutInterruptions(wait);
                 } else {
                     int ticks = (int) ((now - mLastExecutionNanos) / mRequiredSmoothTickDuration);
-                    long nextTick = (mLastExecutionNanos + (ticks + 1));
-                    long wait = nextTick - now;
+                    long nextTickNanos = (long) (mLastExecutionNanos + ((ticks + 1) * mRequiredSmoothTickDuration));
+                    long wait = nextTickNanos - now;
                     sleepWithoutInterruptions(wait);
                 }
                 mLastExecutionNanos = System.nanoTime();
