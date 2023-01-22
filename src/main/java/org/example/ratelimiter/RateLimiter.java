@@ -5,7 +5,7 @@ package org.example.ratelimiter;
  * TPS(Transactions per second). Rate of 5 would suggest, 5 transactions/second. Transaction could be a DB call, API call,
  * or a simple function call.
  * <p>
- * Every {@link RateLimiter} implementation should implement either {@link RateLimiter#throttle(Code)} or, {@link RateLimiter#enter()}.
+ * Every {@link RateLimiter} implementation should implement either {@link RateLimiter#throttle(Code)} or, {@link RateLimiter#acquire()}.
  * They can also choose to implement all.
  * <p>
  * {@link Code} represents a piece of code that needs to be rate limited. It could be a function call, if the code to be rate limited
@@ -29,7 +29,7 @@ public interface RateLimiter {
      * @return true if the code will execute and false if rate limited.
      * <p
      */
-    boolean enter();
+    boolean acquire();
 
     /**
      * Allows multiple permits at the same time. If an expensive task takes n permits, the further calls should take the
@@ -37,7 +37,7 @@ public interface RateLimiter {
      * @param permits Permits required.
      * @return true, if successful, false otherwise.
      */
-    boolean enter(int permits);
+    boolean acquire(int permits);
 
     /**
      * Interface to represent a contiguous piece of code that needs to be rate limited.

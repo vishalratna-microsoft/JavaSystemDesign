@@ -33,7 +33,7 @@ public class SmoothRateLimiter implements RateLimiter {
     }
 
     @Override
-    public boolean enter() {
+    public boolean acquire() {
         synchronized (mLock) {
             if (mLastExecutionNanos == 0L) {
                 // First execution for the instance.
@@ -63,7 +63,7 @@ public class SmoothRateLimiter implements RateLimiter {
     }
 
     @Override
-    public boolean enter(int permits) {
+    public boolean acquire(int permits) {
         throw new NoImplementationException();
     }
 

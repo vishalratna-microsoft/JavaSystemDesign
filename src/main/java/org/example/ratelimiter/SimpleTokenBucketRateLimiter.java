@@ -63,7 +63,7 @@ public class SimpleTokenBucketRateLimiter implements RateLimiter {
     }
 
     @Override
-    public boolean enter() {
+    public boolean acquire() {
         if (mTPS == 0L) {
             return false;
         }
@@ -87,14 +87,14 @@ public class SimpleTokenBucketRateLimiter implements RateLimiter {
                     mCounter = 0;
                     mLastExecutionNanos = 0L;
                     mNextSecondBoundary = 0L;
-                    return enter();
+                    return acquire();
                 }
             }
         }
     }
 
     @Override
-    public boolean enter(int permits) {
+    public boolean acquire(int permits) {
         throw new NoImplementationException();
     }
 

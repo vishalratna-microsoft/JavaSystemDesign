@@ -16,7 +16,7 @@ public class BurstySmoothRateLimiter implements RateLimiter {
     }
 
     @Override
-    public boolean enter(int permits) {
+    public boolean acquire(int permits) {
         synchronized (mLock) {
             if (permits <= 0) {
                 return false;
@@ -81,7 +81,7 @@ public class BurstySmoothRateLimiter implements RateLimiter {
     }
 
     @Override
-    public boolean enter() {
+    public boolean acquire() {
         throw new NoImplementationException();
     }
 }
