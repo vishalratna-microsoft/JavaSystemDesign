@@ -62,6 +62,11 @@ public class SmoothRateLimiter implements RateLimiter {
         }
     }
 
+    @Override
+    public boolean enter(int permits) {
+        throw new NoImplementationException();
+    }
+
     private void sleepWithoutInterruptions(long sleepNanos) {
         long remaining = sleepNanos;
         long end = System.nanoTime() + remaining;

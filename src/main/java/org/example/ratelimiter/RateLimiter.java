@@ -32,6 +32,14 @@ public interface RateLimiter {
     boolean enter();
 
     /**
+     * Allows multiple permits at the same time. If an expensive task takes n permits, the further calls should take the
+     * toll on the rate.
+     * @param permits Permits required.
+     * @return true, if successful, false otherwise.
+     */
+    boolean enter(int permits);
+
+    /**
      * Interface to represent a contiguous piece of code that needs to be rate limited.
      */
     interface Code {

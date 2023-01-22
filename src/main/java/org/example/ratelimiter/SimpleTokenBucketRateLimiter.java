@@ -93,6 +93,11 @@ public class SimpleTokenBucketRateLimiter implements RateLimiter {
         }
     }
 
+    @Override
+    public boolean enter(int permits) {
+        throw new NoImplementationException();
+    }
+
     private void invoke(Code code) {
         try {
             code.invoke();
