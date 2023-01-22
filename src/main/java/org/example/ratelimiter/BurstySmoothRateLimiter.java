@@ -29,6 +29,14 @@ public class BurstySmoothRateLimiter implements RateLimiter {
         }
     }
 
+    /**
+     * Reserves us 'n' permits and returns the earliest when these permits could be used.
+     * If a caller asks for more permits than max transactions per second, we do not stop per se but, the upcoming
+     * transactions get delayed for the required amount of time.
+     * @param permits permits asked for
+     * @param now current time in nanos
+     * @return Earliest time when 'n' permits could be used.
+     */
     private double reservePermitsLocked(int permits, long now) {
         int freshPermitsUsed = 0;
         double nextFreeAvailable = syncLocked(now);
@@ -46,6 +54,12 @@ public class BurstySmoothRateLimiter implements RateLimiter {
         return nextFreeAvailable;
     }
 
+    /**
+     * If the current time has crossed the next free time for the limiter, force it to execute now.
+     * Calculate the permits that are acquired during this time and cap it to the max permits.
+     * @param now Current time in millis
+     * @return Next free available slot.
+     */
     private double syncLocked(long now) {
         if (now > mNextFreeAvailableTime) {
             // Sync potentially available permits.
