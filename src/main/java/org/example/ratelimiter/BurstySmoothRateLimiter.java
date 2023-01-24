@@ -10,9 +10,9 @@ public class BurstySmoothRateLimiter implements RateLimiter {
     private final double mRequiredSmoothTickDuration;
     private double mNextFreeAvailableTime = 0;
 
-    public BurstySmoothRateLimiter(int permits, int maxStoredPermits) {
+    public BurstySmoothRateLimiter(int tps, int maxStoredPermits) {
         this.mMaxStoredPermits = maxStoredPermits;
-        this.mRequiredSmoothTickDuration = (double) NANO_PER_SEC / permits;
+        this.mRequiredSmoothTickDuration = (double) NANO_PER_SEC / tps;
     }
 
     @Override
@@ -22,8 +22,8 @@ public class BurstySmoothRateLimiter implements RateLimiter {
                 return false;
             }
             long now = System.nanoTime();
-            double available = reservePermitsLocked(permits, now);
-            double wait = Math.max(available - now, 0);
+            double nextAvailableTimeNanos = reservePermitsLocked(permits, now);
+            double wait = Math.max(nextAvailableTimeNanos - now, 0);
             sleepWithoutInterruptions((long) wait);
             return true;
         }
