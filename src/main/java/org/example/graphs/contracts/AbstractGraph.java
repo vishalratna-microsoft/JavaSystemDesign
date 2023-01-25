@@ -2,6 +2,11 @@ package org.example.graphs.contracts;
 
 import java.util.*;
 
+/**
+ * Abstract graph implementation that implements the basic set of functionality in directed as well as undirected
+ * graphs.
+ * @param <T> Type of graph.
+ */
 public abstract class AbstractGraph<T> implements Graph<T> {
 
     private final HashMap<T, Set<T>> mGraph;
