@@ -1,7 +1,8 @@
-package org.example.graphs.contracts;
+package org.example.graphs;
 
 import org.example.graphs.DirectedGraph;
 import org.example.graphs.UnDirectedGraph;
+import org.example.graphs.contracts.Graph;
 import org.example.ratelimiter.NoImplementationException;
 
 public class Graphs {

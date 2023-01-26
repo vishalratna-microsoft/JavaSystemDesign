@@ -1,7 +1,6 @@
 package org.example.graphs;
 
 import org.example.graphs.contracts.Graph;
-import org.example.graphs.contracts.Graphs;
 
 import static java.lang.System.out;
 
