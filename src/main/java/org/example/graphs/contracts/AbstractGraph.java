@@ -108,6 +108,11 @@ public abstract class AbstractGraph<T> implements Graph<T> {
         return GraphUtils.isCyclic(this);
     }
 
+    @Override
+    public Graph<T> transpose() {
+        return GraphUtils.transpose(this);
+    }
+
     public abstract boolean isDirected();
 
     private void validateNodes(T a, T b) {

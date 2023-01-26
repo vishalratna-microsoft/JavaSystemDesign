@@ -12,8 +12,9 @@ public class GraphDriver {
         graph.createConnection(2, 3);
         graph.createConnection(3, 4);
         graph.createConnection(1, 4);
-        out.println(graph.isCyclic());
+        graph.addNode(10);
         Graphs.printEdges(graph);
-        Graphs.printNodes(graph);
+        out.println("****");
+        Graphs.printEdges(graph.transpose());
     }
 }
