@@ -84,6 +84,27 @@ public interface Graph<T> {
     Graph<T> transpose();
 
     /**
+     * Degree is defined in undirected graphs, in simple words it is the number of edges the node is part of.
+     * @param node the node to be queried
+     * @return degree of the node.
+     */
+    int degree(T node);
+
+    /**
+     * InDegree is not defined in un-directed graphs. In directed graphs, it is the number of incoming edges on the node.
+     * @param node node of be queried.
+     * @return in-degree of the node.
+     */
+    int inDegree(T node);
+
+    /**
+     * OutDegree is not defined in un-directed graphs. In directed graphs, it is the number of outgoing edges on the node.
+     * @param node node of be queried.
+     * @return out-degree of the node.
+     */
+    int outDegree(T node);
+
+    /**
      * Class representing the edge of the graph.
      *
      * @param <T> Type of the graph.

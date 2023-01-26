@@ -113,6 +113,45 @@ public abstract class AbstractGraph<T> implements Graph<T> {
         return GraphUtils.transpose(this);
     }
 
+    @Override
+    public int degree(T node) {
+        // Degree is not defined in case of directed graphs.
+        if (isDirected())
+            throw new IllegalStateException("Directed graphs have in/out degrees, degree() is not defined");
+
+        // If node is not the part of graph return -1
+        if (!mGraph.containsKey(node)) return -1;
+
+        return mGraph.get(node).size();
+    }
+
+    @Override
+    public int inDegree(T node) {
+        if (!isDirected())
+            throw new IllegalStateException("Un-Directed graphs do not have in degrees, try calling degree()");
+
+        if (!mGraph.containsKey(node)) return -1;
+
+        int inDegree = 0;
+        for (Map.Entry<T, Set<T>> entry : mGraph.entrySet()) {
+            if (entry.getValue().contains(node)) {
+                inDegree++;
+            }
+        }
+        return inDegree;
+    }
+
+    @Override
+    public int outDegree(T node) {
+        if (!isDirected())
+            throw new IllegalStateException("Un-Directed graphs do not have out degrees, try calling degree()");
+
+        // If node is not the part of graph return -1
+        if (!mGraph.containsKey(node)) return -1;
+
+        return mGraph.get(node).size();
+    }
+
     public abstract boolean isDirected();
 
     private void validateNodes(T a, T b) {
