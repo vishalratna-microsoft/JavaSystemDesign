@@ -61,6 +61,10 @@ public interface Graph<T> {
      */
     void addNode(T node);
 
+    /**
+     * Method to check if the graph has cycles or not.
+     * @return true if cyclic, false otherwise.
+     */
     boolean isCyclic();
 
     /**
