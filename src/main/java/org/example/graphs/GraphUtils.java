@@ -1,8 +1,12 @@
 package org.example.graphs;
 
+import org.example.algorithms.Algorithm;
+import org.example.algorithms.BreadthFirstTraversal;
+import org.example.algorithms.DepthFirstTraversal;
 import org.example.graphs.contracts.Graph;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -78,4 +82,15 @@ public class GraphUtils {
         }
         return output;
     }
+
+    public static <T> List<T> dfs(Graph<T> input) {
+        Algorithm<Graph<T>, List<T>> dfs = new DepthFirstTraversal<>();
+        return dfs.apply(input);
+    }
+
+    public static <T> List<T> bfs(Graph<T> input) {
+        Algorithm<Graph<T>, List<T>> bfs = new BreadthFirstTraversal<>();
+        return bfs.apply(input);
+    }
+
 }
