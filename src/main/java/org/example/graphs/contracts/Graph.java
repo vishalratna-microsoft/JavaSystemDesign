@@ -61,6 +61,8 @@ public interface Graph<T> {
      */
     void addNode(T node);
 
+    boolean isCyclic();
+
     /**
      * Class representing the edge of the graph.
      * @param <T> Type of the graph.

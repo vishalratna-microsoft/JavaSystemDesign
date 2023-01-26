@@ -1,25 +1,30 @@
 package org.example.graphs.contracts;
 
+import org.example.graphs.GraphUtils;
+
 import java.util.*;
 
 /**
  * Abstract graph implementation that implements the basic set of functionality in directed as well as undirected
  * graphs. Uses adjacency list to maintain the graph structure.
+ *
  * @param <T> Type of graph.
  */
 public abstract class AbstractGraph<T> implements Graph<T> {
 
     private final HashMap<T, Set<T>> mGraph;
     private final Set<Edge<T>> mEdges;
+    private final Set<T> mNodes;
 
     public AbstractGraph() {
         this.mGraph = new HashMap<>();
         this.mEdges = new HashSet<>();
+        this.mNodes = new HashSet<>();
     }
 
     @Override
     public Set<T> nodes() {
-        return mGraph.keySet();
+        return mNodes;
     }
 
     @Override
@@ -30,6 +35,7 @@ public abstract class AbstractGraph<T> implements Graph<T> {
     @Override
     public boolean createConnection(T a, T b) {
         validateNodes(a, b);
+        trackNodes(a, b);
         // Make entry for node A
         if (isDirected()) {
             createConnectionInternal(a, b);
@@ -39,6 +45,15 @@ public abstract class AbstractGraph<T> implements Graph<T> {
             createConnectionInternal(b, a);
         }
         return true;
+    }
+
+    private void trackNodes(T a, T b) {
+        trackNode(a);
+        trackNode(b);
+    }
+
+    private void trackNode(T node) {
+        mNodes.add(node);
     }
 
     private void createConnectionInternal(T a, T b) {
@@ -83,8 +98,14 @@ public abstract class AbstractGraph<T> implements Graph<T> {
             // See if that node exists already
             if (!mGraph.containsKey(node)) {
                 mGraph.put(node, new HashSet<>());
+                trackNode(node);
             }
         }
+    }
+
+    @Override
+    public boolean isCyclic() {
+        return GraphUtils.isCyclic(this);
     }
 
     public abstract boolean isDirected();
