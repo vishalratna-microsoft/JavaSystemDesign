@@ -1,7 +1,7 @@
 package org.example.graphs;
 
-import org.example.graphs.DirectedGraph;
-import org.example.graphs.UnDirectedGraph;
+import org.example.graphs.implementation.DirectedGraph;
+import org.example.graphs.implementation.UnDirectedGraph;
 import org.example.graphs.contracts.Graph;
 import org.example.ratelimiter.NoImplementationException;
 

@@ -1,4 +1,4 @@
-package org.example.graphs;
+package org.example.graphs.implementation;
 
 import org.example.graphs.contracts.AbstractGraph;
 
