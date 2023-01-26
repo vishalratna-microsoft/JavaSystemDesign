@@ -8,13 +8,13 @@ public class Graphs {
     public static final int DIRECTED = 0;
     public static final int UNDIRECTED = 1;
 
-    public static <T> Graph<T> create(int type) {
+    public static <T> Graph<T> create(Type type) {
         Graph<T> graph;
         switch (type) {
-            case 0:
+            case DIRECTED:
                 graph = new DirectedGraph<>();
                 break;
-            case 1:
+            case UNDIRECTED:
                 graph = new UnDirectedGraph<>();
                 break;
             default:
@@ -33,5 +33,10 @@ public class Graphs {
         for (T node : graph.nodes()) {
             System.out.println(node.toString());
         }
+    }
+
+    public enum Type {
+        DIRECTED,
+        UNDIRECTED
     }
 }

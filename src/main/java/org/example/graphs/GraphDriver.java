@@ -8,7 +8,7 @@ import static java.lang.System.out;
 public class GraphDriver {
 
     public static void main(String[] args) {
-        Graph<Integer> graph = Graphs.create(Graphs.UNDIRECTED);
+        Graph<Integer> graph = Graphs.create(Graphs.Type.DIRECTED);
         graph.createConnection(1, 2);
         graph.createConnection(2, 3);
         graph.createConnection(3, 4);
