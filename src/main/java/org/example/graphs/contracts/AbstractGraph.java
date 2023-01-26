@@ -6,10 +6,16 @@ import java.util.*;
 
 /**
  * Abstract graph implementation that implements the basic set of functionality in directed as well as undirected
- * graphs. Uses adjacency list to maintain the graph structure.
+ * graphs. Uses adjacency list to maintain the graph structure. The list is maintained as a hashset. So, queries on the
+ * node doesn't return the adjacency list in any pre-determined order.
+ * This implementation will not honour the case where multiple edges exists between the same set of nodes. It
+ * compresses all such requests to one edge.
  *
  * @param <T> Type of graph.
  */
+
+// Needs to be split when we implement weighted graphs, in that case, multiple edges will exist between the same nodes
+// with different weights.
 public abstract class AbstractGraph<T> implements Graph<T> {
 
     private final HashMap<T, Set<T>> mGraph;
