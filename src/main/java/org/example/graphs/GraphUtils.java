@@ -11,6 +11,25 @@ import java.util.Set;
  * General purpose graph utility that operates on graphs, works for both directed and undirected.
  */
 public class GraphUtils {
+
+    public static <T> void printEdges(Graph<T> graph) {
+        for (Graph.Edge<T> edge : graph.edges()) {
+            System.out.println(edge.getA().toString() + " -> " + edge.getB().toString());
+        }
+    }
+
+    public static <T> void printNodes(Graph<T> graph) {
+        for (T node : graph.nodes()) {
+            System.out.println(node.toString());
+        }
+    }
+
+    public static <T> void printList(List<T> items) {
+        for (T node : items) {
+            System.out.print(node.toString() + " ");
+        }
+    }
+
     public static <T> boolean isCyclic(Graph<T> graph) {
         boolean isDirected = graph.isDirected();
         Set<T> all = graph.nodes();

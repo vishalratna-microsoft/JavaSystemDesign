@@ -24,18 +24,6 @@ public class Graphs {
         return graph;
     }
 
-    public static <T> void printEdges(Graph<T> graph) {
-        for (Graph.Edge<T> edge : graph.edges()) {
-            System.out.println(edge.getA().toString() + " -> " + edge.getB().toString());
-        }
-    }
-
-    public static <T> void printNodes(Graph<T> graph) {
-        for (T node : graph.nodes()) {
-            System.out.println(node.toString());
-        }
-    }
-
     public enum Type {
         DIRECTED,
         UNDIRECTED
