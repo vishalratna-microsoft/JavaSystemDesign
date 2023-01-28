@@ -20,17 +20,15 @@ public abstract class AbstractGraph<T> implements Graph<T> {
 
     private final HashMap<T, Set<T>> mGraph;
     private final Set<Edge<T>> mEdges;
-    private final Set<T> mNodes;
 
     public AbstractGraph() {
         this.mGraph = new HashMap<>();
         this.mEdges = new HashSet<>();
-        this.mNodes = new HashSet<>();
     }
 
     @Override
     public Set<T> nodes() {
-        return mNodes;
+        return mGraph.keySet();
     }
 
     @Override
@@ -41,7 +39,6 @@ public abstract class AbstractGraph<T> implements Graph<T> {
     @Override
     public boolean createConnection(T a, T b) {
         validateNodes(a, b);
-        trackNodes(a, b);
         // Make entry for node A
         if (isDirected()) {
             createConnectionInternal(a, b);
@@ -53,23 +50,22 @@ public abstract class AbstractGraph<T> implements Graph<T> {
         return true;
     }
 
-    private void trackNodes(T a, T b) {
-        trackNode(a);
-        trackNode(b);
-    }
-
-    private void trackNode(T node) {
-        mNodes.add(node);
-    }
-
     private void createConnectionInternal(T a, T b) {
-        if (!mGraph.containsKey(a)) {
-            mGraph.put(a, new HashSet<>());
-        }
+        maybeCreateNodes(a, b);
         Set<T> connections = mGraph.get(a);
         connections.add(b);
         mGraph.put(a, connections);
         createEdge(a, b);
+    }
+
+    private void maybeCreateNodes(T a, T b) {
+        if (!mGraph.containsKey(a)) {
+            mGraph.put(a, new HashSet<>());
+        }
+        // Additionally create a adjacency list for b also if in case.
+        if (!mGraph.containsKey(b)) {
+            mGraph.put(b, new HashSet<>());
+        }
     }
 
     private void createEdge(T a, T b) {
@@ -104,7 +100,6 @@ public abstract class AbstractGraph<T> implements Graph<T> {
             // See if that node exists already
             if (!mGraph.containsKey(node)) {
                 mGraph.put(node, new HashSet<>());
-                trackNode(node);
             }
         }
     }
