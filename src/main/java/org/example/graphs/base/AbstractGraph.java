@@ -1,4 +1,4 @@
-package org.example.graphs.contracts;
+package org.example.graphs.base;
 
 import org.example.graphs.GraphUtils;
 

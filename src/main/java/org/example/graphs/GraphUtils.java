@@ -1,7 +1,9 @@
 package org.example.graphs;
 
+import org.example.Algorithm;
 import org.example.algorithms.*;
-import org.example.graphs.contracts.Graph;
+import org.example.graphs.algorithms.*;
+import org.example.graphs.base.Graph;
 
 import java.util.HashSet;
 import java.util.List;

@@ -1,6 +1,6 @@
 package org.example.graphs.implementation;
 
-import org.example.graphs.contracts.AbstractGraph;
+import org.example.graphs.base.AbstractGraph;
 
 public class UnDirectedGraph<T> extends AbstractGraph<T> {
     @Override

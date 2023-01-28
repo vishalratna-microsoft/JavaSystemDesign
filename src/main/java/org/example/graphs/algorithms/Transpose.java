@@ -1,7 +1,8 @@
-package org.example.algorithms;
+package org.example.graphs.algorithms;
 
+import org.example.Algorithm;
 import org.example.graphs.Graphs;
-import org.example.graphs.contracts.Graph;
+import org.example.graphs.base.Graph;
 
 public class Transpose<T> implements Algorithm<Graph<T>, Graph<T>> {
     @Override

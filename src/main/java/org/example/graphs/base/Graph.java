@@ -1,4 +1,4 @@
-package org.example.graphs.contracts;
+package org.example.graphs.base;
 
 import java.util.Objects;
 import java.util.Set;

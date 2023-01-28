@@ -1,4 +1,4 @@
-package org.example.algorithms;
+package org.example;
 
 /**
  * Represents a general purpose algorithms that applies on a data structure of type I.
