@@ -1,9 +1,6 @@
 package org.example.graphs;
 
-import org.example.algorithms.Algorithm;
-import org.example.algorithms.BreadthFirstTraversal;
-import org.example.algorithms.DFSTopSort;
-import org.example.algorithms.DepthFirstTraversal;
+import org.example.algorithms.*;
 import org.example.graphs.contracts.Graph;
 
 import java.util.HashSet;
@@ -64,24 +61,8 @@ public class GraphUtils {
     }
 
     public static <T> Graph<T> transpose(Graph<T> input) {
-        // Undirected graphs transpose() make no sense! return the same graph.
-        if (!input.isDirected()) return input;
-
-        Graph<T> output = Graphs.create(Graphs.Type.DIRECTED);
-
-        // Iterate through all the nodes.
-        for (T node : input.nodes()) {
-            // If there is no connection for this node, just add the node in the transposed graph also.
-            if (input.connections(node).size() == 0) {
-                output.addNode(node);
-                continue;
-            }
-            // If it has connections, then reverse the connection direction.
-            for (T connection : input.connections(node)) {
-                output.createConnection(connection, node);
-            }
-        }
-        return output;
+        Algorithm<Graph<T>, Graph<T>> transpose = new Transpose<>();
+        return transpose.apply(input);
     }
 
     public static <T> List<T> dfs(Graph<T> input) {
