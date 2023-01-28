@@ -2,6 +2,7 @@ package org.example.graphs;
 
 import org.example.algorithms.Algorithm;
 import org.example.algorithms.BreadthFirstTraversal;
+import org.example.algorithms.DFSTopSort;
 import org.example.algorithms.DepthFirstTraversal;
 import org.example.graphs.contracts.Graph;
 
@@ -93,4 +94,8 @@ public class GraphUtils {
         return bfs.apply(input);
     }
 
+    public static <T> List<T> topSort(Graph<T> input) {
+        Algorithm<Graph<T>, List<T>> topSort = new DFSTopSort<>();
+        return topSort.apply(input);
+    }
 }
