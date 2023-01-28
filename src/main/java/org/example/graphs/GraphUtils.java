@@ -95,7 +95,7 @@ public class GraphUtils {
     }
 
     public static <T> List<T> topSort(Graph<T> input) {
-        Algorithm<Graph<T>, List<T>> topSort = new DFSTopSort<>();
+        Algorithm<Graph<T>, List<T>> topSort = new KahnAlgorithm<>();
         return topSort.apply(input);
     }
 }
