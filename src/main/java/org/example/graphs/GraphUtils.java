@@ -1,8 +1,10 @@
 package org.example.graphs;
 
 import org.example.Algorithm;
-import org.example.algorithms.*;
-import org.example.graphs.algorithms.*;
+import org.example.graphs.algorithms.BreadthFirstTraversal;
+import org.example.graphs.algorithms.DepthFirstTraversal;
+import org.example.graphs.algorithms.KahnAlgorithm;
+import org.example.graphs.algorithms.Transpose;
 import org.example.graphs.base.Graph;
 
 import java.util.HashSet;
