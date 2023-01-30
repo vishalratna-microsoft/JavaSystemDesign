@@ -46,7 +46,7 @@ public class TarjansAlgorithm<T> implements Algorithm<Graph<T>, Set<List<T>>> {
             }
         }
         // When the node's connections are full explored. Check if this is a start of SCC.
-        // Pop till we encounter the head node of the SCC.
+        // Pop till we encounter the head node(ref. node) of the SCC.
         if (Objects.equals(discovery.get(node), lowLinkValues.get(node))) {
             List<T> component = new ArrayList<>();
             T item;
