@@ -3,6 +3,7 @@ package org.example.graphs.problems;
 import org.example.Algorithm;
 import org.example.graphs.Graphs;
 import org.example.graphs.algorithms.KosarajuAlgorithm;
+import org.example.graphs.algorithms.TarjansAlgorithm;
 import org.example.graphs.base.Graph;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public class StronglyConnectedComponents extends BaseGraphProblem<Set<List<Integ
 
     @Override
     protected Algorithm<Graph<Integer>, Set<List<Integer>>> algorithm() {
-        return new KosarajuAlgorithm<>();
+        return new TarjansAlgorithm<>();
     }
 
     @Override
