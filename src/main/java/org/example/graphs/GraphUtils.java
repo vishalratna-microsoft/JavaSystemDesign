@@ -34,6 +34,15 @@ public class GraphUtils {
         }
     }
 
+    public static void printSCCs(Set<List<Integer>> result) {
+        for (List<Integer> eachScc : result) {
+            for (Integer i : eachScc) {
+                System.out.print(i + " ");
+            }
+            System.out.println();
+        }
+    }
+
     public static <T> boolean isCyclic(Graph<T> graph) {
         boolean isDirected = graph.isDirected();
         Set<T> all = graph.nodes();
