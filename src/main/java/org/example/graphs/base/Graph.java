@@ -85,6 +85,7 @@ public interface Graph<T> {
 
     /**
      * Degree is defined in undirected graphs, in simple words it is the number of edges the node is part of.
+     *
      * @param node the node to be queried
      * @return degree of the node.
      */
@@ -92,6 +93,7 @@ public interface Graph<T> {
 
     /**
      * InDegree is not defined in un-directed graphs. In directed graphs, it is the number of incoming edges on the node.
+     *
      * @param node node of be queried.
      * @return in-degree of the node.
      */
@@ -99,6 +101,7 @@ public interface Graph<T> {
 
     /**
      * OutDegree is not defined in un-directed graphs. In directed graphs, it is the number of outgoing edges on the node.
+     *
      * @param node node of be queried.
      * @return out-degree of the node.
      */
@@ -130,6 +133,11 @@ public interface Graph<T> {
         public Edge(T a, T b) {
             this.a = a;
             this.b = b;
+        }
+
+        @Override
+        public String toString() {
+            return "[" + a + " -> " + b + "]";
         }
 
         public T getA() {

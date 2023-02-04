@@ -1,20 +1,19 @@
 package org.example.graphs;
 
-import org.example.graphs.problems.ProblemGraphTraversal;
-import org.example.graphs.problems.ProblemTopologicalSort;
-import org.example.graphs.problems.StronglyConnectedComponents;
+import org.example.graphs.base.Graph;
+import org.example.graphs.problems.ProblemFindAllBridgesInUnDirectedGraph;
 
-import java.util.List;
 import java.util.Set;
 
-import static org.example.graphs.GraphUtils.printSCCs;
+import static org.example.graphs.GraphUtils.printSetOfEdges;
 
 public class GraphDriver {
 
     public static void main(String[] args) {
-       // ProblemGraphTraversal traversal = new ProblemGraphTraversal();
-        StronglyConnectedComponents scc = new StronglyConnectedComponents();
-        Set<List<Integer>> result = scc.execute();
-        printSCCs(result);
+        // ProblemGraphTraversal traversal = new ProblemGraphTraversal();
+        ProblemFindAllBridgesInUnDirectedGraph findBridges = new ProblemFindAllBridgesInUnDirectedGraph();
+        Set<Graph.Edge<Integer>> result = findBridges.execute();
+        printSetOfEdges(result);
+
     }
 }

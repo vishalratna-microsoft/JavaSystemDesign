@@ -20,6 +20,7 @@ public class TarjansAlgorithm<T> implements Algorithm<Graph<T>, Set<List<T>>> {
     private Set<List<T>> dispatchTarjans(Graph<T> graph) {
         for (T node : graph.nodes()) {
             if (!discovery.containsKey(node)) {
+                stack.clear();
                 tarjan(node, graph);
             }
         }

@@ -43,6 +43,12 @@ public class GraphUtils {
         }
     }
 
+    public static void printSetOfEdges(Set<Graph.Edge<Integer>> result) {
+        for (Graph.Edge<Integer> edge : result) {
+            System.out.println(edge.toString());
+        }
+    }
+
     public static <T> boolean isCyclic(Graph<T> graph) {
         boolean isDirected = graph.isDirected();
         Set<T> all = graph.nodes();
