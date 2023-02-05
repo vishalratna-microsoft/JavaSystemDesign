@@ -5,8 +5,6 @@ import org.example.graphs.base.Graph;
 import org.example.NoImplementationException;
 
 public class Graphs {
-    public static final int DIRECTED = 0;
-    public static final int UNDIRECTED = 1;
 
     public static <T> Graph<T> create(Type type) {
         Graph<T> graph;
