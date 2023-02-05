@@ -1,10 +1,7 @@
 package org.example.graphs;
 
 import org.example.Algorithm;
-import org.example.graphs.algorithms.BreadthFirstTraversal;
-import org.example.graphs.algorithms.DepthFirstTraversal;
-import org.example.graphs.algorithms.KahnAlgorithm;
-import org.example.graphs.algorithms.Transpose;
+import org.example.graphs.algorithms.*;
 import org.example.graphs.base.Graph;
 
 import java.util.HashSet;
@@ -101,6 +98,11 @@ public class GraphUtils {
     public static <T> Graph<T> transpose(Graph<T> input) {
         Algorithm<Graph<T>, Graph<T>> transpose = new Transpose<>();
         return transpose.apply(input);
+    }
+
+    public static <T> boolean isDisconnected(Graph<T> input) {
+        Algorithm<Graph<T>, Boolean> isDisconnected = new IsGraphDisconnected<>();
+        return isDisconnected.apply(input);
     }
 
     public static <T> List<T> dfs(Graph<T> input) {
