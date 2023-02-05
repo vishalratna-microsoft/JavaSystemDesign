@@ -36,10 +36,9 @@ public class IsGraphDisconnected<T> implements Algorithm<Graph<T>, Boolean> {
             random = node;
             Set<T> visited1 = new HashSet<>();
             dfs(random, input, visited1);
-            Graph<T> transpose = input.transpose();
             Set<T> visited2 = new HashSet<>();
-            dfs(random, input, visited2);
-            val = examineDisconnected(visited1, visited2, transpose);
+            dfs(random, input.transpose(), visited2);
+            val = examineDisconnected(visited1, visited2, input);
             break;
         }
         return val;
