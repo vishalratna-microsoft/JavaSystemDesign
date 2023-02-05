@@ -2,6 +2,7 @@ package org.example.graphs.algorithms;
 
 import org.example.Algorithm;
 import org.example.graphs.base.Graph;
+import org.example.NoImplementationException;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -22,6 +23,8 @@ public class FindArticulationPointUsingTarjan<T> implements Algorithm<Graph<T>, 
 
     @Override
     public Set<T> apply(Graph<T> input) {
+        if (input.isDirected()) throw new NoImplementationException("Algorithm does not work for directed graphs");
+
         Set<T> articulationPts = new HashSet<>();
         for (T node : input.nodes()) {
             mStartNode = node;

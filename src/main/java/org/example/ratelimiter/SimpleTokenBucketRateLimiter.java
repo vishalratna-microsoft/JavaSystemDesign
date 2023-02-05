@@ -1,5 +1,7 @@
 package org.example.ratelimiter;
 
+import org.example.NoImplementationException;
+
 /**
  * Implementation of {@link RateLimiter} that limits the number of calls to a predefined rate(transactions/sec). Any transaction(s)
  * over the specified limit is ignored.

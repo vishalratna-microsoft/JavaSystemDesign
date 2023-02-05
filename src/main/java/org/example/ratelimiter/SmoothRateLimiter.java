@@ -1,5 +1,7 @@
 package org.example.ratelimiter;
 
+import org.example.NoImplementationException;
+
 import java.util.concurrent.TimeUnit;
 
 /**
