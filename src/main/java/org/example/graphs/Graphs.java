@@ -1,7 +1,6 @@
 package org.example.graphs;
 
-import org.example.graphs.implementation.DirectedGraph;
-import org.example.graphs.implementation.UnDirectedGraph;
+import org.example.graphs.implementation.AbstractGraph;
 import org.example.graphs.base.Graph;
 import org.example.NoImplementationException;
 
@@ -13,10 +12,20 @@ public class Graphs {
         Graph<T> graph;
         switch (type) {
             case DIRECTED:
-                graph = new DirectedGraph<>();
+                graph = new AbstractGraph<>() {
+                    @Override
+                    public boolean isDirected() {
+                        return true;
+                    }
+                };
                 break;
             case UNDIRECTED:
-                graph = new UnDirectedGraph<>();
+                graph = new AbstractGraph<>() {
+                    @Override
+                    public boolean isDirected() {
+                        return false;
+                    }
+                };
                 break;
             default:
                 throw new NoImplementationException();

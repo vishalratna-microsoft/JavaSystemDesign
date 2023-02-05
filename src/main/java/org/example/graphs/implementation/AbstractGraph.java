@@ -1,6 +1,7 @@
-package org.example.graphs.base;
+package org.example.graphs.implementation;
 
 import org.example.graphs.GraphUtils;
+import org.example.graphs.base.Graph;
 
 import java.util.*;
 
