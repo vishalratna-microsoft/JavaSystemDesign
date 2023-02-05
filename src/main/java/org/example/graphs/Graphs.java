@@ -28,7 +28,7 @@ public class Graphs {
                 };
                 break;
             default:
-                throw new NoImplementationException();
+                throw new NoImplementationException("Graph type does not exist in the system, or is not configured.");
         }
         return graph;
     }
