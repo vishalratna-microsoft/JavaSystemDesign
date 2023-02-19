@@ -144,6 +144,15 @@ public abstract class AbstractGraph<T> implements Graph<T> {
     }
 
     @Override
+    public Edge<T> edge(T a, T b) {
+        Edge<T> edge = new Edge<>(a, b);
+        if (mEdges.contains(edge)) {
+            return edge;
+        }
+        return null;
+    }
+
+    @Override
     public int outDegree(T node) {
         if (!isDirected())
             throw new IllegalStateException("Un-Directed graphs do not have out degrees, try calling degree()");

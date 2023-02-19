@@ -31,7 +31,7 @@ public interface Graph<T> {
      *
      * @return set of edges
      */
-    Set<Edge<T>> edges();
+    Set<? extends Edge<T>> edges();
 
     /**
      * Provides a method to connect to nodes inside the graph.  It returns false if the connection cannot be created.
@@ -108,11 +108,19 @@ public interface Graph<T> {
     int outDegree(T node);
 
     /**
+     * Returns the {@link Edge} representing the 2 nodes, a and b.
+     * @param a Node A
+     * @param b Node B
+     * @return edge object connecting 2 nodes.
+     */
+    Edge<T> edge(T a, T b);
+
+    /**
      * Class representing the edge of the graph.
      *
      * @param <T> Type of the graph.
      */
-    final class Edge<T> {
+    public class Edge<T> {
         private T a;
 
         @Override
@@ -137,7 +145,7 @@ public interface Graph<T> {
 
         @Override
         public String toString() {
-            return "[" + a + " -> " + b + "]";
+            return "[" + a.toString() + " -> " + b.toString() + "]";
         }
 
         public T getA() {
