@@ -27,7 +27,7 @@ public class GraphUtils {
 
     public static <T> void printList(List<T> items) {
         for (T node : items) {
-            System.out.print(node.toString() + " ");
+            System.out.print(node.toString() + " | ");
         }
     }
 

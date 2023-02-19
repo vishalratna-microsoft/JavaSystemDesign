@@ -1,14 +1,7 @@
 package org.example.graphs;
 
-import org.example.graphs.base.Graph;
-import org.example.graphs.problems.ProblemArticulationPoints;
-import org.example.graphs.problems.ProblemFindAllBridgesInUnDirectedGraph;
-import org.example.graphs.problems.ProblemFindStronglyConnectedComponents;
 
-import java.util.List;
-import java.util.Set;
-
-import static org.example.graphs.GraphUtils.*;
+import org.example.experiment.ScenarioTracker;
 
 public class GraphDriver {
 
@@ -19,8 +12,9 @@ public class GraphDriver {
 //        printSetOfEdges(result);
 //        ProblemFindStronglyConnectedComponents scc = new ProblemFindStronglyConnectedComponents();
 //        printSCCs(scc.execute());
-        ProblemArticulationPoints points = new ProblemArticulationPoints();
-        printList(List.of(points.execute()));
-
+//        ProblemArticulationPoints points = new ProblemArticulationPoints();
+//        printList(List.of(points.execute()));
+        ScenarioTracker tracker = new ScenarioTracker();
+        tracker.register("vishal","ratna","delta_sync_complete");
     }
 }
