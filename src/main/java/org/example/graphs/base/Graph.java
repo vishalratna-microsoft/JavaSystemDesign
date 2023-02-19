@@ -1,5 +1,4 @@
 package org.example.graphs.base;
-
 import java.util.Objects;
 import java.util.Set;
 
@@ -31,7 +30,7 @@ public interface Graph<T> {
      *
      * @return set of edges
      */
-    Set<? extends Edge<T>> edges();
+    Set<Edge<T>> edges();
 
     /**
      * Provides a method to connect to nodes inside the graph.  It returns false if the connection cannot be created.

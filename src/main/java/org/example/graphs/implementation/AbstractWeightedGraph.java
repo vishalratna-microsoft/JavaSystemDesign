@@ -7,12 +7,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class WeightedGraph<T> implements Graph<T> {
-    private final Graph<T> mBase;
+public abstract class AbstractWeightedGraph<T> extends AbstractGraph<T> {
     private final Map<Edge<T>, Integer> mEdges;
 
-    public WeightedGraph(@NotNull Graph<T> graph) {
-        this.mBase = graph;
+    public AbstractWeightedGraph() {
+        super();
         this.mEdges = new HashMap<>();
     }
 
@@ -22,14 +21,20 @@ public abstract class WeightedGraph<T> implements Graph<T> {
     }
 
     public boolean createConnection(T a, T b, int weight) {
-        mBase.createConnection(a, b);
-        Edge<T> edge = mBase.edge(a, b);
+        super.createConnection(a, b);
+        Edge<T> edge = super.edge(a, b);
         mEdges.put(edge, weight);
         // If the graph is undirected, we need to add the reverse edge also.
         if (!isDirected()) {
-            mEdges.put(mBase.edge(b, a), weight);
+            mEdges.put(super.edge(b, a), weight);
         }
         return true;
+    }
+
+    @Override
+    public void addNode(T node) {
+        super.addNode(node);
+        createConnection(node,node,0);
     }
 
     public Map<Edge<T>, Integer> weightedEdges() {
@@ -37,13 +42,13 @@ public abstract class WeightedGraph<T> implements Graph<T> {
     }
 
     @Override
-    public Set<? extends Edge<T>> edges() {
-        return mBase.edges();
+    public Set<Edge<T>> edges() {
+        return super.edges();
     }
 
     int weight(T a, T b) {
-        if (!mBase.edgeExists(a, b)) return -1;
+        if (!super.edgeExists(a, b)) return -1;
 
-        return mEdges.get(mBase.edge(a, b));
+        return mEdges.get(super.edge(a, b));
     }
 }
