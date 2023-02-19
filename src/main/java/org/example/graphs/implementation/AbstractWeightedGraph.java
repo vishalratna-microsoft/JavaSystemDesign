@@ -28,11 +28,6 @@ public abstract class AbstractWeightedGraph<T> extends AbstractGraph<T> {
         return true;
     }
 
-    @Override
-    public void addNode(T node) {
-        super.addNode(node);
-    }
-
     public Map<Edge<T>, Integer> weightedEdges() {
         return mWeights;
     }
