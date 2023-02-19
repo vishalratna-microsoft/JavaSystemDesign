@@ -31,7 +31,6 @@ public abstract class AbstractWeightedGraph<T> extends AbstractGraph<T> {
     @Override
     public void addNode(T node) {
         super.addNode(node);
-        createConnection(node,node,0);
     }
 
     public Map<Edge<T>, Integer> weightedEdges() {
