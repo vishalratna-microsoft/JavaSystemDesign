@@ -1,18 +1,15 @@
 package org.example.graphs.implementation;
 
-import org.example.graphs.base.Graph;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 public abstract class AbstractWeightedGraph<T> extends AbstractGraph<T> {
-    private final Map<Edge<T>, Integer> mEdges;
+    private final Map<Edge<T>, Integer> mWeights;
 
     public AbstractWeightedGraph() {
         super();
-        this.mEdges = new HashMap<>();
+        this.mWeights = new HashMap<>();
     }
 
     @Override
@@ -23,10 +20,10 @@ public abstract class AbstractWeightedGraph<T> extends AbstractGraph<T> {
     public boolean createConnection(T a, T b, int weight) {
         super.createConnection(a, b);
         Edge<T> edge = super.edge(a, b);
-        mEdges.put(edge, weight);
+        mWeights.put(edge, weight);
         // If the graph is undirected, we need to add the reverse edge also.
         if (!isDirected()) {
-            mEdges.put(super.edge(b, a), weight);
+            mWeights.put(super.edge(b, a), weight);
         }
         return true;
     }
@@ -38,7 +35,7 @@ public abstract class AbstractWeightedGraph<T> extends AbstractGraph<T> {
     }
 
     public Map<Edge<T>, Integer> weightedEdges() {
-        return mEdges;
+        return mWeights;
     }
 
     @Override
@@ -49,6 +46,6 @@ public abstract class AbstractWeightedGraph<T> extends AbstractGraph<T> {
     int weight(T a, T b) {
         if (!super.edgeExists(a, b)) return -1;
 
-        return mEdges.get(super.edge(a, b));
+        return mWeights.get(super.edge(a, b));
     }
 }
