@@ -32,8 +32,8 @@ public class Graphs {
         return graph;
     }
 
-    public static <T> Graph<T> createWeighted(Type type) {
-        Graph<T> graph;
+    public static <T> AbstractWeightedGraph<T> createWeighted(Type type) {
+        AbstractWeightedGraph<T> graph;
         switch (type) {
             case DIRECTED:
                 graph = new AbstractWeightedGraph<T>() {

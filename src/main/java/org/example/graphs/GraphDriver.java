@@ -2,6 +2,9 @@ package org.example.graphs;
 
 
 import org.example.experiment.ScenarioTracker;
+import org.example.graphs.algorithms.PrimsAlgorithm;
+import org.example.graphs.implementation.AbstractWeightedGraph;
+import org.example.graphs.problems.ProblemMinimumSpanningTree;
 
 public class GraphDriver {
 
@@ -14,7 +17,10 @@ public class GraphDriver {
 //        printSCCs(scc.execute());
 //        ProblemArticulationPoints points = new ProblemArticulationPoints();
 //        printList(List.of(points.execute()));
-        ScenarioTracker tracker = new ScenarioTracker();
-        tracker.register("vishal","ratna","delta_sync_complete");
+
+        ProblemMinimumSpanningTree spanningTree = new ProblemMinimumSpanningTree();
+        PrimsAlgorithm.PrimResult<Integer> result = spanningTree.execute();
+        GraphUtils.printSetOfEdges(result.contributingEdges);
+        System.out.println("Sum: " + result.sum);
     }
 }

@@ -37,7 +37,7 @@ public abstract class AbstractWeightedGraph<T> extends AbstractGraph<T> {
         return super.edges();
     }
 
-    int weight(T a, T b) {
+    public int weight(T a, T b) {
         if (!super.edgeExists(a, b)) return -1;
 
         return mWeights.get(super.edge(a, b));
