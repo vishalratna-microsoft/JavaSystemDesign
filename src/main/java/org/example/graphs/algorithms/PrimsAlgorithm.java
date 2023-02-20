@@ -50,6 +50,8 @@ public class PrimsAlgorithm<T> implements Algorithm<AbstractWeightedGraph<T>, Pr
         }
     }
 
+    // Represents the entity that is held in the priority queue, having all the data points to create an edge in a
+    // spanning tree.
     private static class PrimsBlock<T> {
         int weight;
         T node;
@@ -62,6 +64,7 @@ public class PrimsAlgorithm<T> implements Algorithm<AbstractWeightedGraph<T>, Pr
         }
     }
 
+    // Just a pair of values to represent spanning tree edges and minimum sum.
     public static final class PrimResult<T> {
         PrimResult(Set<Graph.Edge<T>> contributingEdges, int sum) {
             this.contributingEdges = contributingEdges;
