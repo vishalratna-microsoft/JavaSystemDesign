@@ -49,14 +49,14 @@ public class DisjointSet<T extends Comparable<T>> {
         if (mParents.get(u) == u) {
             return u;
         }
-        T boss = findRepresentative(mParents.get(u));
+        T representative = findRepresentative(mParents.get(u));
         // Path compression.
-        mParents.put(u, boss);
-        return boss;
+        mParents.put(u, representative);
+        return representative;
     }
 
     // Iterative approach without path compression.
-//    private T findBoss(T u) {
+//    private T findRepresentative(T u) {
 //        T tmp = u;
 //        while (mParents.get(tmp) != tmp) {
 //            tmp = mParents.get(tmp);
