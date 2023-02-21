@@ -119,7 +119,7 @@ public interface Graph<T> {
      *
      * @param <T> Type of the graph.
      */
-    public class Edge<T> {
+    class Edge<T> {
         private T a;
 
         @Override

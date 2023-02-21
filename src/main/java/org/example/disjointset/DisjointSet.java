@@ -7,11 +7,14 @@ import java.util.Set;
 /**
  * General purpose Disjoint set that excepts set of nodes from a graph(Can be general nodes that does not belong to graph).
  * Stores rank and parent information in the hashmap.
+ *
  * @param <T> Type of the disjoint set.
  */
-public class DisjointSet<T extends Comparable<T>> {
+public class DisjointSet<T> {
     private final Map<T, T> mParents;
     private final Map<T, Integer> mRanks;
+
+    private boolean enableLogging = false;
 
     public DisjointSet(Set<T> nodes) {
         mParents = new HashMap<>(nodes.size());
@@ -36,15 +39,24 @@ public class DisjointSet<T extends Comparable<T>> {
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public boolean hasSameRepresentative(T u , T v) {
-        if(findRepresentative(u) == findRepresentative(v)) {
-            System.out.println(u + " and " + v + " has same representative.");
+    public boolean hasSameRepresentative(T u, T v) {
+        if (findRepresentative(u) == findRepresentative(v)) {
+            if (enableLogging) {
+                System.out.println(u + " and " + v + " has same representative.");
+            }
             return true;
         } else {
-            System.out.println(u + " and " + v + " does not have the same representative.");
+            if (enableLogging) {
+                System.out.println(u + " and " + v + " does not have the same representative.");
+            }
             return false;
         }
     }
+
+    public void setEnableLogging(boolean val) {
+        this.enableLogging = val;
+    }
+
     public T findRepresentative(T u) {
         if (mParents.get(u) == u) {
             return u;
