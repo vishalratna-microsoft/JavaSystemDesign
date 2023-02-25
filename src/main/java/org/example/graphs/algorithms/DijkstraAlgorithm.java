@@ -5,6 +5,18 @@ import org.example.graphs.implementation.AbstractWeightedGraph;
 
 import java.util.*;
 
+/**
+ * AbstractWeightedGraph<String> graph = Graphs.createWeighted(Graphs.Type.UNDIRECTED);
+ *         graph.createConnection("A", "B", 6);
+ *         graph.createConnection("A", "D", 1);
+ *         graph.createConnection("D", "B", 2);
+ *         graph.createConnection("B", "E", 2);
+ *         graph.createConnection("D", "E", 1);
+ *         graph.createConnection("B", "C", 5);
+ *         graph.createConnection("E", "C", 5);
+ *         
+ * @param <T>
+ */
 public class DijkstraAlgorithm<T> implements Algorithm<AbstractWeightedGraph<T>, Map<T, DijkstraAlgorithm.MetaInfo<T>>> {
 
     private final PriorityQueue<DijkstraEdge<T>> mQueue;
