@@ -51,6 +51,8 @@ public class CheapestFlightsWithKStops implements Algorithm<AbstractWeightedGrap
 
             // Explore connections.
             for (String connection : input.connections(e.current)) {
+                // Opposed to Dijkstra we will use the weight that was passed in the queue. Not using the distance map.
+                // As taking distance map will ignore a possible path with lesser stops. Distance array works for minimising the distance.
                 int costToReachCurrent = e.weight;
                 int costToConnection = input.weight(e.current, connection);
                 if ((costToReachCurrent + costToConnection) < mInfo.get(connection).minDist && e.stops <= mMaxStops) {
