@@ -40,7 +40,7 @@ public class CheapestFlightsWithKStops implements Algorithm<AbstractWeightedGrap
     public Integer apply(AbstractWeightedGraph<String> input) {
         mQueue = new ArrayDeque<>();
         init(input);
-        mQueue.offer(new QueueEntry(mStart, null, 0));
+        mQueue.offer(new QueueEntry(mStart, null, 0,0));
         return applyAlgo(input);
     }
 
@@ -51,13 +51,13 @@ public class CheapestFlightsWithKStops implements Algorithm<AbstractWeightedGrap
 
             // Explore connections.
             for (String connection : input.connections(e.current)) {
-                int costToReachCurrent = mInfo.get(e.current).minDist;
+                int costToReachCurrent = e.weight;
                 int costToConnection = input.weight(e.current, connection);
                 if ((costToReachCurrent + costToConnection) < mInfo.get(connection).minDist && e.stops <= mMaxStops) {
                     DijkstraAlgorithm.MetaInfo<String> tmp = mInfo.get(connection);
                     tmp.minDist = costToConnection + costToReachCurrent;
                     mInfo.put(connection, tmp);
-                    QueueEntry next = new QueueEntry(connection, e.current, e.stops + 1);
+                    QueueEntry next = new QueueEntry(connection, e.current, e.stops + 1, tmp.minDist);
                     mQueue.offer(next);
                 }
             }
@@ -85,11 +85,12 @@ public class CheapestFlightsWithKStops implements Algorithm<AbstractWeightedGrap
         String current;
         String parent;
         int stops;
-
-        QueueEntry(String curr, String parent, int stops) {
+        int weight;
+        QueueEntry(String curr, String parent, int stops, int weight) {
             this.current = curr;
             this.parent = parent;
             this.stops = stops;
+            this.weight = weight;
         }
     }
 }
