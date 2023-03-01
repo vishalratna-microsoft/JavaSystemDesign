@@ -39,11 +39,13 @@ public class FindArticulationPointUsingTarjan<T> implements Algorithm<Graph<T>, 
         mDiscovery.put(node, mTimer);
         mLowLink.put(node, mTimer);
         mTimer++;
+        int count = 0;
 
         for (T connection : graph.connections(node)) {
             if (connection == parent) continue;
 
             if (!mDiscovery.containsKey(connection)) {
+                count++;
                 findArticulation(connection, graph, node, articulationPts);
                 mLowLink.put(node, Math.min(mLowLink.get(node), mLowLink.get(connection)));
                 // If low link of connection is able to reach before node, then it is not a articulation point.
@@ -56,7 +58,7 @@ public class FindArticulationPointUsingTarjan<T> implements Algorithm<Graph<T>, 
             }
         }
 
-        if (node == mStartNode && graph.connections(node).size() > 0) {
+        if (node == mStartNode && count > 1) {
             articulationPts.add(node);
         }
     }
