@@ -24,7 +24,7 @@ public class DijkstraAlgorithm<T> implements Algorithm<AbstractWeightedGraph<T>,
     private final Map<T, MetaInfo<T>> mTracker;
 
     public DijkstraAlgorithm(T start) {
-        this.mQueue = new PriorityQueue<>(Comparator.comparingInt(o -> o.weight));
+        this.mQueue = new PriorityQueue<>(Comparator.comparingInt(o -> o.distance));
         this.mStart = start;
         this.mTracker = new HashMap<>();
     }
@@ -43,7 +43,7 @@ public class DijkstraAlgorithm<T> implements Algorithm<AbstractWeightedGraph<T>,
     public Map<T, MetaInfo<T>> apply(AbstractWeightedGraph<T> input) {
         init(input);
         Set<T> visited = new HashSet<>();
-        mQueue.add(new DijkstraEdge<>(0, mStart, null));
+        mQueue.add(new DijkstraEdge<>(0, mStart));
         applyDijkstra(input, visited);
         return mTracker;
     }
@@ -52,34 +52,34 @@ public class DijkstraAlgorithm<T> implements Algorithm<AbstractWeightedGraph<T>,
         while (!mQueue.isEmpty()) {
             DijkstraEdge<T> item = mQueue.poll();
 
-            // Explore connections
-            for (T connection : input.connections(item.current)) {
-                if (!explored.contains(connection)) {
-                    int weight = input.weight(item.current, connection);
-                    // Check if weight to reach connection is better than what we know.
-                    int i = mTracker.get(item.current).minDist + weight;
-                    if ((i < mTracker.get(connection).minDist)) {
-                        MetaInfo<T> t = mTracker.get(connection);
-                        t.via = item.current;
-                        t.minDist = i;
-                        mTracker.put(connection, t);
+            if(!explored.contains(item.current)) {
+                explored.add(item.current);
+                // Explore connections
+                for (T connection : input.connections(item.current)) {
+                    if (!explored.contains(connection)) {
+                        int weight = input.weight(item.current, connection);
+                        // Check if weight to reach connection is better than what we know.
+                        int i = mTracker.get(item.current).minDist + weight;
+                        if ((i < mTracker.get(connection).minDist)) {
+                            MetaInfo<T> t = mTracker.get(connection);
+                            t.via = item.current;
+                            t.minDist = i;
+                            mTracker.put(connection, t);
+                        }
+                        DijkstraEdge<T> e = new DijkstraEdge<>(mTracker.get(connection).minDist, connection);
+                        mQueue.add(e);
                     }
-                    DijkstraEdge<T> e = new DijkstraEdge<>(weight, connection, item.current);
-                    mQueue.add(e);
-                    explored.add(item.current);
                 }
             }
         }
     }
 
     private static class DijkstraEdge<T> {
-        int weight;
+        int distance;
         T current;
-        T parent;
 
-        DijkstraEdge(int w, T c, T p) {
-            this.weight = w;
-            this.parent = p;
+        DijkstraEdge(int w, T c) {
+            this.distance = w;
             this.current = c;
         }
     }
